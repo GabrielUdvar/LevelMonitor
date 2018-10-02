@@ -33,6 +33,7 @@
 *.ipr
 mvnw
 mvnw.cmd
+.mvn
 
 
 
