@@ -1,10 +1,13 @@
 package ro.siit.java11.LevelMonitor.domain;
 
+/**
+ * Class for the SensorResponse object
+ */
+
 public class SensorResponse {
     public int numOfBytes;
     public String responseString;
     public boolean correctReading=false;
-
 
     public int getNumOfBytes() {
         return numOfBytes;

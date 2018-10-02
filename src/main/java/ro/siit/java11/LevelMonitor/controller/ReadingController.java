@@ -1,6 +1,5 @@
 package ro.siit.java11.LevelMonitor.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +17,20 @@ import ro.siit.java11.LevelMonitor.service.SensorService;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
-
+/**
+ * */
 @Controller
 public class ReadingController {
 
     @Autowired
     private ReadingService readingService;
 
+    /**
+     * Controller Method lists all readings existing in the database
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/listReadings", method = RequestMethod.GET)
     public String listReadings(Model model, HttpServletRequest request){
         List<Reading> readings = readingService.getAll(); //it is a reversed order list from the DB.
@@ -33,6 +39,14 @@ public class ReadingController {
         return "listReadings";
     }
 
+
+    /**
+     * Controller Method creates a manual reading (Dip Stick Reading) using user input data
+     * @param readingRequest
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/listReadings", method = RequestMethod.POST)
     public String createReading(@Valid CreateReadingRequest readingRequest, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
@@ -53,6 +67,13 @@ public class ReadingController {
         }
     }
 
+
+    /**
+     * Controller Method removes an db entry based in the ReadingID
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/listReadings/removeReading/{id}", method = RequestMethod.POST)
     public String removeReading(@PathVariable long id, Model model){
         readingService.removeReading(id);
@@ -60,6 +81,13 @@ public class ReadingController {
         return "redirect:/listReadings";
     }
 
+
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "listReadings/update/{id}", method = RequestMethod.GET)
     public String getReading(@PathVariable long id, Model model){
         Reading reading = readingService.getById(id);
@@ -68,6 +96,14 @@ public class ReadingController {
         return "updateReadings";
     }
 
+
+    /**
+     * Controller Method updates a reading based on the ReadingID, using user input data
+     * @param readingRequest
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "listReadings/update/listReadings/update/{id}/", method = RequestMethod.POST)
     public String updateReading(CreateReadingRequest readingRequest, @PathVariable long id, Model model){
         Reading reading = readingService.getReading(readingRequest);;
@@ -76,22 +112,18 @@ public class ReadingController {
         return "redirect:/listReadings";
     }
 
-//    private Reading getManualReading(CreateReadingRequest readingRequest) {
-//        Reading reading = new Reading();
-//        reading.setTankNumber(readingRequest.getTankNumber());
-//        reading.setFillLevel(readingRequest.getFillLevel());
-//        reading.setWaterLevel(readingRequest.getWaterLevel());
-//
-//        return reading;
-//    }
-
-private CreateReadingRequest getReadingRequest (Reading reading){
+    /**
+     * Creates a ReadingRequest object for the manual reading and updates of entries in the db
+     * @param reading
+     * @return
+     */
+    private CreateReadingRequest getReadingRequest (Reading reading){
         CreateReadingRequest createReadingRequest = new CreateReadingRequest();
         createReadingRequest.setTankNumber(reading.getTankNumber());
         createReadingRequest.setFillLevel(reading.getFillLevel());
         createReadingRequest.setWaterLevel(reading.getWaterLevel());
 
         return createReadingRequest;
-}
+    }
 
 }

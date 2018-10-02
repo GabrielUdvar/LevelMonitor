@@ -13,11 +13,8 @@ public interface ReadingDAO {
 
     void createManualReading(Reading reading);
     void createAutomatedReading(Reading reading);
-
     void removeReading(long id);
-
     void updateReading(Reading reading, long id);
-
     Reading getReadingById(long id);
 
 

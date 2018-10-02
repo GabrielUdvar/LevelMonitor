@@ -19,11 +19,17 @@ public class SensorController {
     @Autowired
     private SensorService sensorService;
 
+
+    /**
+     * Controller method to call for the generation of an automated sensor reading
+     * @param model
+     * @param readingRequest
+     * @return
+     */
     @RequestMapping(value ="/listReadings/getSensorReading/", method = RequestMethod.POST)
     public String getSensorReading(Model model, CreateReadingRequest readingRequest){
         Reading sensorReading =  readingService.getSensorReading("COM2");
         readingService.createAutomatedReading(sensorReading);
-
 
         return "redirect:/listReadings";
     }

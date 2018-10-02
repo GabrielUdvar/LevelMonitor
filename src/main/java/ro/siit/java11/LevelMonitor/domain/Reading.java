@@ -1,5 +1,9 @@
 package ro.siit.java11.LevelMonitor.domain;
 
+/**
+ * Class for the Reading object
+ */
+
 public class Reading {
     public long id;
     public int tankNumber;

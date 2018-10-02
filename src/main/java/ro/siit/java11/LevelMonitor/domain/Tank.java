@@ -1,5 +1,11 @@
 package ro.siit.java11.LevelMonitor.domain;
 
+/**
+ * Class for Tank object
+ */
+
+//TODO link sensor readings and tanks. Methods to calculate tank volumes, fill levels, alarms, etc.
+
 public class Tank {
 
     public int tankID;

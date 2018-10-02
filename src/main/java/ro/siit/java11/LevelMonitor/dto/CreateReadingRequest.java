@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotEmpty;
 
+/**
+ * Data Transfer Object
+ */
 public class CreateReadingRequest {
 
     @Autowired
@@ -83,16 +86,5 @@ public class CreateReadingRequest {
     public void setChecksum(String checksum) {
         this.checksum = checksum;
     }
-
-
-
-//    public CreateReadingRequest getCreateReadingRequest() {
-//        return createReadingRequest;
-//    }
-//
-//    public void setCreateReadingRequest(CreateReadingRequest createReadingRequest) {
-//        this.createReadingRequest = createReadingRequest;
-//    }
-
 
 }

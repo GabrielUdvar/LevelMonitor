@@ -33,11 +33,9 @@ public class ApplicationConfiguration {
                 .append("?user=")
                 .append("postgres")
                 .append("&password=")
-                .append("Reaction1").toString();
+                .append("parolatemporarapentrubazadedate").toString();
 
         return new SingleConnectionDataSource(url, false);
     }
-//    @Bean
-////
 
 }

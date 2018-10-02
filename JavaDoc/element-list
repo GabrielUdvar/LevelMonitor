@@ -1,0 +1,7 @@
+ro.siit.java11.LevelMonitor
+ro.siit.java11.LevelMonitor.config
+ro.siit.java11.LevelMonitor.controller
+ro.siit.java11.LevelMonitor.dao
+ro.siit.java11.LevelMonitor.domain
+ro.siit.java11.LevelMonitor.dto
+ro.siit.java11.LevelMonitor.service

@@ -15,6 +15,11 @@ public class ReadingDAOImplementation implements ReadingDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
+    /**
+     * DAO method that selects all entries in the Readings table and generates a list of all existing readings
+     * @return
+     */
     @Override
     public List<Reading> getAll() {
         return jdbcTemplate.query("SELECT * FROM readings", new RowMapper<Reading>() {
@@ -36,6 +41,11 @@ public class ReadingDAOImplementation implements ReadingDAO {
         });
     }
 
+
+    /**
+     * DAO method that inserts a manually created reading into the Readings table
+     * @param reading
+     */
     @Override
     public void createManualReading(Reading reading) {
         jdbcTemplate.update("INSERT INTO readings(tanknumber, filllevel, waterlevel) VALUES (?, ?, ?)",reading.getTankNumber(),
@@ -43,23 +53,45 @@ public class ReadingDAOImplementation implements ReadingDAO {
         //no date and time meed to be added. Current date and time from the DB are set into the "Readings" table. Other values are "Default" in DB.
     }
 
+
+    /**
+     * DAO method that inserts an automatically created reading (from the sensors) into the Readings table
+     * @param reading
+     */
     @Override
     public void createAutomatedReading(Reading reading) {
         jdbcTemplate.update("INSERT INTO readings(tanknumber, filllevel, waterlevel, temperature, probeoffset, " +
-                "softwarevers, probeerror, checksum) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",reading.getTankNumber(),
+                        "softwarevers, probeerror, checksum) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",reading.getTankNumber(),
                 reading.getFillLevel(), reading.getWaterLevel(), reading.getTemperature(), reading.getProbeOffset(), reading.getSoftwareVersion(), reading.getProbeError(), reading.getChecksum());
     }
 
+
+    /**
+     * /** DAO method used to delete a db entry based on the Reading_ID
+     * @param id
+     */
     @Override
     public void removeReading(long id) {
         jdbcTemplate.update("DELETE FROM readings WHERE reading_id = ? ",id);
     }
 
+
+    /**
+     * DAO method used to update a reading in the Readings table
+     * @param reading
+     * @param id
+     */
     @Override
     public void updateReading(Reading reading, long id) {
         jdbcTemplate.update("UPDATE readings SET tanknumber = ?, filllevel = ?, waterlevel = ? WHERE reading_id = ?", reading.getTankNumber(), reading.getFillLevel(), reading.getWaterLevel(), id);
     }
 
+
+    /**
+     * AO method used to return a reading object from the db, based on the Reading_ID
+     * @param id
+     * @return
+     */
     public Reading getReadingById(long id){
         List<Reading> readings=jdbcTemplate.query("SELECT * FROM readings where reading_id=?", new RowMapper<Reading>() {
             @Override

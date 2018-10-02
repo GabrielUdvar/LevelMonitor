@@ -9,7 +9,14 @@ public class SensorDAOImplementation implements SensorDAO {
     @Autowired
     private SerialPort comPort;
 
-    //interrogation of the sensor with the $A01 command
+
+    /**
+     * Method used to sent the $A01 command to the HLS6010 sensor.
+     * This command triggers the sensor response sending back required data to generate an automated reading object.
+     * Sensor response is handled with getSensorResponse method in the SensorService class.
+     * @param comPort
+     * @return
+     */
     public static SensorResponse getSensorState(SerialPort comPort) {
         try {
             for (int j=0; j<1; ++j){
