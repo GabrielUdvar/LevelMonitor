@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head>
+       <title>Readings List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:10px;padding:2px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black; height: 5px}
+.tg th{font-family:Arial, sans-serif;font-size:10px;font-weight:normal;padding:2px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0mbg{font-size:12px;font-family:"Arial", Gadget, sans-serif !important;;text-align:center;vertical-align:center; height: 5px}
+.tg .tg-0gle{font-weight:bold;background-color:#ffcb2f;text-align:center;vertical-align:top}
+</style>
+
+<p th:text="'Add Manual Measurement'"/>
+<form action="#" th:action="@{/listReadings}" th:object="${createReadingRequest}" method="post">
+
+        <div>
+            <input type="text" id="tankNumber" name="tankNumber" th:value="${tankNumber != null}" />
+            <label th:for="${tankNumber}">Tank Number</label>
+        </div>
+        <div>
+            <input type="text" id="fillLevel" name="fillLevel" th:value="${fillLevel != null}" />
+            <label th:for="${fillLevel}">Fill Level</label>
+        </div>
+        <div>
+            <input type="text" id="waterLevel" name="waterLevel" th:value="${waterLevel != null}" />
+            <label th:for="${waterLevel}">Water Level</label>
+        </div>
+    <div>
+        <input type="submit" id="doUpdate" name="save reading" value="Create Dip-Stick Reading"/>
+    </div>
+</form>
+
+<div>
+    <td>
+        <form th:action="@{/listReadings/getSensorReading/}" th:object="${reading}" method="post">
+            <input type="submit" value="Get Sensor Reading"/>
+        </form>
+    </td>
+</div>
+<div></div>
+<div></div>
+
+<table class="tg" id="Readings History" dt:table="true">
+    <thead>
+    <tr>
+        <th class="tg-0gle">Tank</th>
+        <th class="tg-0gle">Fill Level [mm]</th>
+        <th class="tg-0gle">Water Level [mm]</th>
+        <th class="tg-0gle">Temp°C</th>
+        <th class="tg-0gle">ProbeOffset[mm]</th>
+        <th class="tg-0gle">Date</th>
+        <th class="tg-0gle">Time</th>
+    </tr>
+    </thead>
+
+    <tbody id="listReadings">
+    <tr th:each="reading : ${listReadings}" >
+
+        <td class="tg-0mbg" th:text="${reading.tankNumber}"></td>
+        <td class="tg-0mbg" th:text="${reading.fillLevel}"></td>
+        <td class="tg-0mbg" th:text="${reading.waterLevel}"></td>
+        <td class="tg-0mbg" th:text="${reading.temperature}"></td>
+        <td class="tg-0mbg" th:text="${reading.probeOffset}"></td>
+        <td class="tg-0mbg" th:text="${reading.date}"></td>
+        <td class="tg-0mbg" th:text="${reading.time}"></td>
+        <td>
+            <form th:action="@{/listReadings/removeReading/} + ${reading?.id} + '/'" th:object="${reading}" method="post">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+        <td>
+            <a th:href="@{/listReadings/update/}+${reading?.id}">Update</a>
+        </td>
+
+    </tr>
+    </tbody>
+
+</table>
+
+
+</div>
+</body>
+</html>

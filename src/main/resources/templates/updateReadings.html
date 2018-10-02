@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Readings</title>
+</head>
+
+<body>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0mbg{font-size:12px;font-family:"Arial Black", Gadget, sans-serif !important;;text-align:center;vertical-align:top}
+.tg .tg-0gle{font-weight:bold;background-color:#ffcb2f;text-align:center;vertical-align:top}
+</style>
+
+<form action ="#" th:action="@{listReadings/update/}+${reading_id} + '/' "th:object="${updateReadingRequest}" method="post">
+    <div>
+        <label th:for="${tankNumber}">Tank Number</label>
+        <input type="text" id="tankNumber" name="tankNumber" th:value="*{tankNumber}" />
+
+    </div>
+    <div>
+        <input type="text" id="fillLevel" name="fillLevel" th:value="*{fillLevel}" />
+        <label th:for="${fillLevel}">Fill Level</label>
+    </div>
+    <div>
+        <input type="text" id="waterLevel" name="waterLevel" th:value="*{waterLevel}" />
+        <label th:for="${waterLevel}">Water Level</label>
+    </div>
+
+    <div>
+        <input type="submit" id="doUpdate" name="save reading" value="update reading"/>
+    </div>
+
+</form>
+
+
+
+
+</body>
+</html>

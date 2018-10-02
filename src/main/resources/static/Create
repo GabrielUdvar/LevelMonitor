@@ -1,0 +1,39 @@
+create database FillLevel;
+
+create table Readings (
+	Reading_id serial,
+	TankNumber VARCHAR(2),
+	FillLevel numeric,
+	WaterLevel numeric,
+	Temperature numeric DEFAULT '15',
+	ProbeOffset numeric DEFAULT '0',
+	SoftwareVers VARCHAR(4) DEFAULT "001",
+	ProbeError VARCHAR(2) DEFAULT 0,
+	CheckSUM VARCHAR(10) 'DEFAULT 0',
+	date_created date NOT NULL DEFAULT NOW(),
+	time_created time NOT NULL DEFAULT NOW()
+);
+
+INSERT INTO Readings(TankNumber, FillLevel, WaterLevel, Temperature, ProbeOffset, SoftwareVers, ProbeError, CheckSUM) VALUES
+('1', '1000.05', '0', '20.0', '0', '001', '0', '00'),
+('1', '990.06', '0', '20.0', '0', '001', '0', '00'),
+('1', '980.08', '0', '20.0', '0', '001', '0', '00'),
+('1', '970.00', '0', '20.0', '0', '001', '0', '00'),
+('1', '960.09', '0', '20.0', '0', '001', '0', '00'),
+('1', '950.05', '0', '20.0', '0', '001', '0', '00'),
+('1', '940.56', '0', '20.0', '0', '001', '0', '00'),
+('1', '930.96', '0', '20.0', '0', '001', '0', '00'),
+('1', '920.00', '0', '20.0', '0', '001', '0', '00'),
+('1', '910.79', '0', '20.0', '0', '001', '0', '00'),
+('1', '900.97', '0', '20.0', '0', '001', '0', '00'),
+('1', '890.45', '0', '20.0', '0', '001', '0', '00'),
+('1', '880.05', '0', '-3.0', '0', '001', '0', '00');
+
+Create table Tanks (
+	TankID int NOT NULL,
+	TankName varchar(30),
+	TankShape varchar(20),
+	TankVolume numeric NOT NULL,
+	PRIMARY KEY (TankID),
+	FOREIGN KEY ()
+);
