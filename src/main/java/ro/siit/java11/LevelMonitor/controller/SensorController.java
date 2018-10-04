@@ -28,7 +28,7 @@ public class SensorController {
      */
     @RequestMapping(value ="/listReadings/getSensorReading/", method = RequestMethod.POST)
     public String getSensorReading(Model model, CreateReadingRequest readingRequest){
-        Reading sensorReading =  readingService.getSensorReading("COM2");
+        Reading sensorReading =  readingService.getSensorReading("COM3");
         readingService.createAutomatedReading(sensorReading);
 
         return "redirect:/listReadings";

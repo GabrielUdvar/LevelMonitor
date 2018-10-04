@@ -50,8 +50,9 @@ public class SensorServiceImplementation implements SensorService {
      * @throws InterruptedException
      */
     private static SensorResponse verifySensorAnswerIntegrity(SerialPort comPort, int numRead, String stringResponse) throws InterruptedException {
+        try{
         if (numRead>=24){
-            if( stringResponse.startsWith("#")){
+            if(( stringResponse.startsWith("O"))||(stringResponse.startsWith("/"))||(stringResponse.startsWith("#"))){
                 SensorResponse sensorResponse = new SensorResponse();
                 sensorResponse.setNumOfBytes(numRead);
                 sensorResponse.setResponseString(stringResponse);
@@ -62,8 +63,11 @@ public class SensorServiceImplementation implements SensorService {
             }
         }
         else{
-            Thread.sleep(1000);
+            Thread.sleep(3000);
             SensorDAOImplementation.getSensorState(comPort);
+        }
+        }finally {
+            comPort.closePort();
         }
         return null;
     }
