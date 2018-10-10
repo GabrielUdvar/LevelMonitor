@@ -26,6 +26,7 @@ public class SensorController {
      * @param readingRequest
      * @return
      */
+    //TODO drop-down list with available COM ports in the main menu.
     @RequestMapping(value ="/listReadings/getSensorReading/", method = RequestMethod.POST)
     public String getSensorReading(Model model, CreateReadingRequest readingRequest){
         Reading sensorReading =  readingService.getSensorReading("COM3");

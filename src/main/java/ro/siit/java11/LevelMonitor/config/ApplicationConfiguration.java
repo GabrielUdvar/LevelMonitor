@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 public class ApplicationConfiguration {
     private static final int PORT = 5432;
     private static final String DB = "filllevel";
-    private static final String SERIALPORT = "COM3";
 
     @Bean
     public JdbcTemplate jdbcTemplate() {

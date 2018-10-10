@@ -36,6 +36,7 @@ public class ReadingServiceImplementation implements ReadingService {
     @Override
     public List<Reading> getAll() {
         List<Reading> readingsList = new ArrayList<>(readingDAO.getAll());
+        //TODO sort list in ascending or descending order
         List<Reading> reverseReadingsList = reverseList(readingsList); //returning a reversed list in order to display results from newer to older.
 
         return reverseReadingsList;

@@ -1,0 +1,12 @@
+If you want to use the ATG Simulator provided, in order to check the "Get sensor reading" button, please follow the next steps:
+- Install Virtual Serial Port Driver.
+    This software will create pairs of COM ports that will allow you to get sensor readings.
+    After installation, run the app and select the "Manage Ports tab".
+    Select "First port" and "Second port" and click Add Pair. This will create a pair of virtual ports in which First port
+    is connected to the ATG (sensor simulation) app and Second port is connected to the LevelMonitor app.
+- Run ATGSim.exe
+    This will allow you to simulate levels of Diesel and Water, which will be transmitted to the LevelMonitor app.
+    Make sure you have the message COMx: Opened in the bottom left corner. This indicates that the COM pair is OK.
+    Use the up and down buttons to increase and decrease the levels.
+- Modify the COM port in the SensorController class (line 31), by adding the "Second Port" value from the Virtual Serial Port Driver app.
+- Run the LevelMonitor app.

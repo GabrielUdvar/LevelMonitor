@@ -27,6 +27,7 @@ public class SensorServiceImplementation implements SensorService {
             byte[] readBuffer = new byte[comPort.bytesAvailable()]; //a byte array read buffer used to store the raw bytes response of the sensor
             int numRead = comPort.readBytes(readBuffer, readBuffer.length);
             String stringResponse = new String(readBuffer); //conversion of the bytes array into a string array
+            //TODO use the bytes to process data and convert to String later.
             System.out.println("Sensor response" + stringResponse);
             //generation of the sensorResponse object but only after its integrity has been validated
             SensorResponse sensorResponse = verifySensorAnswerIntegrity(comPort, numRead, stringResponse);
@@ -41,7 +42,6 @@ public class SensorServiceImplementation implements SensorService {
      * Method is used to check for the integrity and validity of a sensor response.
      * Due to communication break-ups some sensor responses might be corrupted.
      * Conditions: response should have more than 24 bytes and string response should start with #
-     * //TODO also implement CRC verification (see sensor documentation)
      * If an invalid response is sent, the sensor is polled again
      * @param comPort
      * @param numRead
@@ -49,6 +49,7 @@ public class SensorServiceImplementation implements SensorService {
      * @return
      * @throws InterruptedException
      */
+    //TODO implement CRC verification (see sensor documentation)
     private static SensorResponse verifySensorAnswerIntegrity(SerialPort comPort, int numRead, String stringResponse) throws InterruptedException {
         try{
         if (numRead>=24){

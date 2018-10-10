@@ -22,7 +22,7 @@ public class ReadingDAOImplementation implements ReadingDAO {
      */
     @Override
     public List<Reading> getAll() {
-        return jdbcTemplate.query("SELECT * FROM readings", new RowMapper<Reading>() {
+        return jdbcTemplate.query("SELECT * FROM readings order by Reading_id asc", new RowMapper<Reading>() {
             @Override
             public Reading mapRow(ResultSet resultSet, int i) throws SQLException {
                 Reading reading = new Reading();
@@ -110,8 +110,6 @@ public class ReadingDAOImplementation implements ReadingDAO {
         },id);
         return readings.get(0); //return the only element of the 'readings' list
     }
-
-
 
 }
 
